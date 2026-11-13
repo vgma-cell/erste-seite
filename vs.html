@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Che Guevara</title>
+  <style>
+    :root {
+      --bg: #0b1d3a;
+      --text: #f3efe2;
+      --card: rgba(255, 255, 255, 0.07);
+      --accent: #d4af37;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem 1rem;
+      background: var(--bg);
+      color: var(--text);
+      font-family: Georgia, "Times New Roman", serif;
+      transition: background 0.6s ease, color 0.6s ease;
+    }
+
+    main {
+      width: 100%;
+      max-width: 560px;
+      text-align: center;
+    }
+
+    .hello {
+      font-family: system-ui, sans-serif;
+      font-size: 0.85rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 0.75rem;
+    }
+
+    h1 {
+      font-size: clamp(2.2rem, 7vw, 3.4rem);
+      line-height: 1.1;
+      margin-bottom: 0.75rem;
+    }
+
+    .tagline {
+      font-family: system-ui, sans-serif;
+      opacity: 0.75;
+      margin-bottom: 2.5rem;
+    }
+
+    h2 {
+      font-family: system-ui, sans-serif;
+      font-size: 0.9rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 1rem;
+    }
+
+    ul { list-style: none; display: grid; gap: 0.75rem; margin-bottom: 2.5rem; }
+
+    li {
+      background: var(--card);
+      border-left: 4px solid var(--accent);
+      border-radius: 10px;
+      padding: 1rem 1.25rem;
+      text-align: left;
+      font-size: 1.1rem;
+      backdrop-filter: blur(6px);
+      transition: transform 0.2s ease;
+    }
+
+    li:hover { transform: translateX(6px); }
+
+    li span {
+      display: block;
+      font-family: system-ui, sans-serif;
+      font-size: 0.85rem;
+      opacity: 0.65;
+      margin-top: 0.2rem;
+    }
+
+    .ziel {
+      margin-bottom: 2.5rem;
+      padding: 1.25rem 1.5rem;
+      border: 1px solid var(--accent);
+      border-radius: 12px;
+      background: var(--card);
+      text-align: left;
+    }
+
+    .ziel p {
+      font-size: 1rem;
+      line-height: 1.5;
+    }
+
+    .ziel p + p { margin-top: 0.75rem; }
+
+    button {
+      font-family: system-ui, sans-serif;
+      font-size: 1rem;
+      padding: 0.8rem 1.6rem;
+      border: none;
+      border-radius: 999px;
+      background: var(--accent);
+      color: #0b1d3a;
+      font-weight: 600;
+      cursor: pointer;
+      transition: transform 0.15s ease, filter 0.15s ease;
+    }
+
+    button:hover { filter: brightness(1.1); transform: translateY(-2px); }
+    button:active { transform: translateY(0); }
+  </style>
+</head>
+<body>
+  <main>
+    <p class="hello">Porträt</p>
+    <h1>Che Guevara</h1>
+    <p class="tagline">Ernesto Guevara · 1928 – 1967 · Arzt, Revolutionär, Guerillaführer</p>
+
+    <h2>Auf einen Blick</h2>
+    <ul>
+      <li>Geboren 1928 in Rosario, Argentinien<span>Er studierte Medizin in Buenos Aires und reiste mit dem Motorrad durch Südamerika.</span></li>
+      <li>Kubanische Revolution<span>Er schloss sich Fidel Castro an. 1959 stürzten die Revolutionäre die Regierung Batista.</span></li>
+      <li>Ämter in Kuba<span>Er war unter anderem Präsident der Nationalbank und Industrieminister.</span></li>
+      <li>Tod in Bolivien<span>Er wurde 1967 bei einem Guerillaeinsatz gefangen genommen und am 9. Oktober erschossen.</span></li>
+    </ul>
+
+    <h2>Zwei Sichtweisen</h2>
+    <section class="ziel">
+      <p>Anhänger sehen in ihm ein Symbol für den Kampf gegen Ungleichheit und Imperialismus. Sein Porträt ist weltweit bekannt.</p>
+      <p>Kritiker verweisen auf Hinrichtungen nach der Revolution, auf Arbeitslager und auf seine Gewaltbereitschaft. Auch seine Wirtschaftspolitik in Kuba gilt vielen als gescheitert.</p>
+    </section>
+
+    <button id="farbwechsler" type="button">Farbe wechseln</button>
+  </main>
+
+  <script>
+    // Alle Paletten bleiben im Blau-Gold-Stil, nur die Töne wechseln
+    const paletten = [
+      { bg: "#0b1d3a", text: "#f3efe2", card: "rgba(255,255,255,0.07)", accent: "#d4af37" },
+      { bg: "#102a54", text: "#fff8e1", card: "rgba(255,255,255,0.08)", accent: "#f0c75e" },
+      { bg: "#06122a", text: "#efe7d0", card: "rgba(255,255,255,0.06)", accent: "#c9a227" },
+      { bg: "#14305f", text: "#fdf6e3", card: "rgba(255,255,255,0.09)", accent: "#e6b800" }
+    ];
+
+    let aktuell = 0;
+    const wurzel = document.documentElement;
+
+    document.getElementById("farbwechsler").addEventListener("click", () => {
+      aktuell = (aktuell + 1) % paletten.length;
+      const p = paletten[aktuell];
+      wurzel.style.setProperty("--bg", p.bg);
+      wurzel.style.setProperty("--text", p.text);
+      wurzel.style.setProperty("--card", p.card);
+      wurzel.style.setProperty("--accent", p.accent);
+    });
+  </script>
+</body>
+</html>
